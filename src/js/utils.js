@@ -25,25 +25,25 @@ export async function loadMenuOptions() {
 
 }
 export async function randomMeals() {
-  const baseURL = import.meta.env.VITE_SERVER_URL;
-  const randomMealsUrl = `${baseURL}randomselection.php`;
+  // const baseURL = import.meta.env.VITE_SERVER_URL;
+  // const randomMealsUrl = `${baseURL}randomselection.php`;
 
-  // const url = "https://themealdb.p.rapidapi.com/randomselection.php";
+  const randomMealsUrl = "https://themealdb.p.rapidapi.com/lookup.php?i=52772";
   const options = {
 	method: "GET",
 	headers: {
 		"x-rapidapi-key": RAPIDAPI_KEY,
 		"x-rapidapi-host": HOST
-	  }
-  };
+	}}
 
   try {
     const response = await fetch(randomMealsUrl, options);
-    const result = await response.meals.text();
+    console.log(response);
+    const result = await response.text();
+    console.log(result);
     const parentEl = document.querySelector("main");
     renderListWithTemplate(loadListTemplate, parentEl, result);
     // loadListTemplate(result);
-    // console.log(result);
   } catch (error) {
     // console.error(error);
   }
