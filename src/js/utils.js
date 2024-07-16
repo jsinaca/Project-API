@@ -40,12 +40,13 @@ export async function randomMeals() {
   try {
     const response = await fetch(randomMealsUrl, options);
     const result = await response.meals.text();
-    loadListTemplate(result);
+    const parentEl = document.querySelector("main");
+    renderListWithTemplate(loadListTemplate, parentEl, result);
+    // loadListTemplate(result);
     // console.log(result);
   } catch (error) {
     // console.error(error);
   }
-
 }
 
 export async function loadListTemplate(data) {
@@ -61,4 +62,12 @@ export async function loadListTemplate(data) {
       >
       </li>`
 
+}
+
+export function renderListWithTemplate(templateFn, parentElement, list, position = "afterbegin", clear = false) {
+  const htmlStrings = list.map(templateFn);
+  if (clear) {
+    parentElement.innerHTML = "";
+  }
+  parentElement.insertAdjacentHTML(position, htmlStrings.join(""));
 }
