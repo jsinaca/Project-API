@@ -1,4 +1,4 @@
-import { loadHeaderFooter, renderListWithTemplate } from "./utils.js";
+import { renderListWithTemplate } from "./utils.js";
 
 export function loadListTemplate(data) {
 	return `<li class="recipe-recipe">

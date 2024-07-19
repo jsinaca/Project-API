@@ -19,8 +19,6 @@ export default class ExternalServices {
             "x-rapidapi-key": KEY,
             "x-rapidapi-host": VITE_HOST,
         }};
-    
-
   }
   async getRandomMeals() {
     const response = await fetch(baseURL + `randomselection.php`, this.options);
@@ -32,6 +30,17 @@ export default class ExternalServices {
     const response = await convertToJson(products);
     return response.meals[0];
   }
+  async getCategories() {
+    const response = await fetch(baseURL + `categories.php`, this.options);
+    const data = await convertToJson(response);
+    return data.categories;
+  }
+  async getCategoryMeals(category) {
+    const response = await fetch(baseURL + `filter.php?c=${category}`, this.options);
+    const data = await convertToJson(response);
+    return data.meals;
+  }
+
   async checkout(formData) {
     const temp = JSON.stringify(formData);
     const options = {

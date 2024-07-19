@@ -28,7 +28,7 @@ export default class RecipeDetails {
 		
 		
 	}
-  async renderRecipe() {
+	async renderRecipe() {
 		const instructionsCorrections = this.recipe.strInstructions.replaceAll("\n", "<br>");
 		const correctVideo = getParams("v", this.recipe.strYoutube);
 		
