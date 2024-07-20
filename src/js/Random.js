@@ -1,5 +1,5 @@
 import ExternalServices from "./ExternalServices.mjs";
-import RecipeDetails from "./recipe.mjs"
+import RecipeDetails from "./recipe.mjs";
 
 const dataSource = new ExternalServices();
 

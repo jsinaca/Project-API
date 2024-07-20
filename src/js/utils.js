@@ -18,7 +18,7 @@ export async function loadHeaderFooter() {
 
   renderWithTemplate(headerTemp, header);
   renderWithTemplate(footerTemp, footer);
-  carousel()
+  carousel();
 }
 
 export async function loadTemplate(path) {
@@ -80,23 +80,25 @@ function carousel() {
   const data = getLocalStorage("last-view");
   if (data) {
     const parentElement = document.querySelector(".carousel");
-    renderWithTemplate("Recenty View",parentElement.previousElementSibling);
-    renderListWithTemplate(templateCarousel, parentElement, data, "beforeend")
+    renderWithTemplate("Recenty View", parentElement.previousElementSibling);
+    renderListWithTemplate(templateCarousel, parentElement, data, "beforeend");
     const arrows = ` <a class="prev">&#10094;</a>
-    <a class="next">&#10095;</a>`
+    <a class="next">&#10095;</a>`;
     const buttons = carouselButtons(data);
-    renderWithTemplate(arrows,parentElement, "beforeend");
-    renderWithTemplate(buttons,parentElement, "afterend");
-    document.querySelector(".prev").addEventListener("click", function() {
-      showSlides(slideIndex += -1);
+    renderWithTemplate(arrows, parentElement, "beforeend");
+    renderWithTemplate(buttons, parentElement, "afterend");
+    document.querySelector(".prev").addEventListener("click", function () {
+      showSlides((slideIndex += -1));
     });
-    document.querySelector(".next").addEventListener("click", function() {
-      showSlides(slideIndex += 1);
+    document.querySelector(".next").addEventListener("click", function () {
+      showSlides((slideIndex += 1));
     });
     var items = document.querySelectorAll(".dot");
-    items.forEach((item) => item.addEventListener("click", function(event) {
-      showSlides(slideIndex = parseInt(event.target.dataset.id));
-    }));
+    items.forEach((item) =>
+      item.addEventListener("click", function (event) {
+        showSlides((slideIndex = parseInt(event.target.dataset.id)));
+      }),
+    );
     abilitateCarouselButtons();
   }
 }
@@ -109,13 +111,13 @@ function templateCarousel(element) {
     <p class="carousel-area">${element.strArea}</p>
     <p class="carousel-category">${element.strCategory}</p>
     </a></div>
-    `
+    `;
   return temp;
 }
 function carouselButtons(data) {
   var but = `<div class="dots">`;
   data.forEach((element, index) => {
-    but += `<span class="dot" data-id="${index + 1}"></span>`
+    but += `<span class="dot" data-id="${index + 1}"></span>`;
   });
   return but;
 }
@@ -125,9 +127,15 @@ function abilitateCarouselButtons() {
 function showSlides(n) {
   let slides = document.getElementsByClassName("card");
   let dots = document.getElementsByClassName("dot");
-  if (n > slides.length) {slideIndex = 1}
-  if (n < 1) {slideIndex = slides.length}
-  for (var element of slides) {element.style.display = "none"}
+  if (n > slides.length) {
+    slideIndex = 1;
+  }
+  if (n < 1) {
+    slideIndex = slides.length;
+  }
+  for (var element of slides) {
+    element.style.display = "none";
+  }
   for (var el of dots) {
     el.className = el.className.replace(" active", "");
   }
