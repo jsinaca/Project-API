@@ -1,4 +1,3 @@
-import e from "connect-flash";
 import { loadHeaderFooter, renderWithTemplate, getParams, getLocalStorage, setLocalStorage } from "./utils.js";
 
 export default class RecipeDetails {
