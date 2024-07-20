@@ -1,6 +1,6 @@
-import ExternalServices from "./ExternalServices.mjs";
 const RAPIDAPI_KEY = "ba341f0179msh3b704b322f3a8dbp10e46bjsn5769d1e5fbf6";
 const HOST = "themealdb.p.rapidapi.com";
+let slideIndex = 1;
 
 export function getLocalStorage(key) {
   return JSON.parse(localStorage.getItem(key));
@@ -18,6 +18,7 @@ export async function loadHeaderFooter() {
 
   renderWithTemplate(headerTemp, header);
   renderWithTemplate(footerTemp, footer);
+  carousel()
 }
 
 export async function loadTemplate(path) {
@@ -26,24 +27,13 @@ export async function loadTemplate(path) {
   return template;
 }
 
-export function renderWithTemplate(template, parentElement, possition = "afterbegin") {
+export function renderWithTemplate(
+  template,
+  parentElement,
+  possition = "afterbegin",
+) {
   parentElement.insertAdjacentHTML(possition, template);
 }
-
-// export async function loadMenuOptions() {}
-
-// export async function randomMeals() {
-//   const extServ = new ExternalServices();
-//   const meals = await extServ.getRandomMeals();
-
-//   try {
-    
-//     const parentEl = document.querySelector(".recipe-list");
-//     renderListWithTemplate(loadListTemplate, parentEl, meals);
-//   } catch (error) {
-//     console.error(error);
-//   }
-// }
 
 export async function loadListTemplate(data) {
   return `<li class="recipe-recipe">
@@ -77,13 +67,70 @@ export function getParams(param, link = undefined) {
     const queryString = window.location.search;
     const urlParams = new URLSearchParams(queryString);
     const recipeId = urlParams.get(param);
-    return recipeId
+    return recipeId;
   } else {
     const temp = new URL(link);
     const queryString = temp.search;
     const urlParams = new URLSearchParams(queryString);
     const videoId = urlParams.get(param);
-    return videoId
-
+    return videoId;
   }
+}
+function carousel() {
+  const data = getLocalStorage("last-view");
+  if (data) {
+    const parentElement = document.querySelector(".carousel");
+    renderWithTemplate("Recenty View",parentElement.previousElementSibling);
+    renderListWithTemplate(templateCarousel, parentElement, data, "beforeend")
+    const arrows = ` <a class="prev">&#10094;</a>
+    <a class="next">&#10095;</a>`
+    const buttons = carouselButtons(data);
+    renderWithTemplate(arrows,parentElement, "beforeend");
+    renderWithTemplate(buttons,parentElement, "afterend");
+    document.querySelector(".prev").addEventListener("click", function() {
+      showSlides(slideIndex += -1);
+    });
+    document.querySelector(".next").addEventListener("click", function() {
+      showSlides(slideIndex += 1);
+    });
+    var items = document.querySelectorAll(".dot");
+    items.forEach((item) => item.addEventListener("click", function(event) {
+      showSlides(slideIndex = parseInt(event.target.dataset.id));
+    }));
+    abilitateCarouselButtons();
+  }
+}
+function templateCarousel(element) {
+  const temp = `
+    <div class="card fade">
+    <a href="/recipe/?recipe=${element.idMeal}">    
+    <img class="carousel-img" src="${element.strMealThumb}" alt="${element.strMealThumb} image" />
+    <p class="carousel-name">${element.strMeal}</p>
+    <p class="carousel-area">${element.strArea}</p>
+    <p class="carousel-category">${element.strCategory}</p>
+    </a></div>
+    `
+  return temp;
+}
+function carouselButtons(data) {
+  var but = `<div class="dots">`;
+  data.forEach((element, index) => {
+    but += `<span class="dot" data-id="${index + 1}"></span>`
+  });
+  return but;
+}
+function abilitateCarouselButtons() {
+  showSlides(slideIndex);
+}
+function showSlides(n) {
+  let slides = document.getElementsByClassName("card");
+  let dots = document.getElementsByClassName("dot");
+  if (n > slides.length) {slideIndex = 1}
+  if (n < 1) {slideIndex = slides.length}
+  for (var element of slides) {element.style.display = "none"}
+  for (var el of dots) {
+    el.className = el.className.replace(" active", "");
+  }
+  slides[slideIndex - 1].style.display = "block";
+  dots[slideIndex - 1].className += " active";
 }

@@ -25,6 +25,11 @@ export default class ExternalServices {
     const data = await convertToJson(response);
     return data.meals;
   }
+  async getRandomMeal() {
+    const response = await fetch(baseURL + `random.php`, this.options);
+    const data = await convertToJson(response);
+    return data.meals[0];
+  }
   async findRecipeById(id) {
     const products = await fetch (`${baseURL}lookup.php?i=${id}`, this.options);
     const response = await convertToJson(products);
@@ -36,7 +41,22 @@ export default class ExternalServices {
     return data.categories;
   }
   async getCategoryMeals(category) {
-    const response = await fetch(baseURL + `filter.php?c=${category}`, this.options);
+    const response = await fetch(`${baseURL}filter.php?c=${category}`, this.options);
+    const data = await convertToJson(response);
+    return data.meals;
+  }
+  async getCountries() {
+    const response = await fetch(`${baseURL}list.php?a=list`, this.options);
+    const data = await convertToJson(response);
+    return data.meals;
+  }
+  async getCountryMeals(country) {
+    const response = await fetch(`${baseURL}filter.php?a=${country}`, this.options);
+    const data = await convertToJson(response);
+    return data.meals;
+  }
+  async latest() {
+    const response = await fetch(`${baseURL}latest.php`, this.options);
     const data = await convertToJson(response);
     return data.meals;
   }

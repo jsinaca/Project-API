@@ -1,16 +1,23 @@
-import { loadHeaderFooter, renderWithTemplate, getParams } from "./utils.js";
+import e from "connect-flash";
+import { loadHeaderFooter, renderWithTemplate, getParams, getLocalStorage, setLocalStorage } from "./utils.js";
 
 export default class RecipeDetails {
-  constructor(id, services) {
+  constructor(services, id = undefined) {
     this.id = id;
     this.services = services;
     this.recipe = {};
   }
   async init() {
     loadHeaderFooter();
-    this.recipe = await this.services.findRecipeById(this.id);
+	if (this.id) {
+		this.recipe = await this.services.findRecipeById(this.id);
+
+	} else {
+		this.recipe = await this.services.getRandomMeal();
+	}
 		document.querySelector("title").innerHTML = this.recipe.strMeal
     this.loadDetails();
+	this.lastViews();
   }
 
 	async loadDetails() {
@@ -20,20 +27,17 @@ export default class RecipeDetails {
 		const rec = await this.renderRecipe();
 		renderWithTemplate(rec, recipe);
 
-		// todo finished this section convined list and display ingredients 
 		const [ingredients, measure] = this.getIngredientsAndMesure();
-		// const pair = ingredients.map((value, index) => ({[value]: measure[index]}));
 		const pair = Object.assign.apply({}, ingredients.map((value, index) => ({[value]: measure[index]})));
 		this.loadIngredients(pair);
-		
-		
 	}
+
 	async renderRecipe() {
 		const instructionsCorrections = this.recipe.strInstructions.replaceAll("\n", "<br>");
 		const correctVideo = getParams("v", this.recipe.strYoutube);
 		
-		return `<a href="#">${this.recipe.strArea}</a>
-		<a href="#">${this.recipe.strCategory}</a><br>
+		return `<a href="/country/?a=${this.recipe.strArea}">${this.recipe.strArea}</a>
+		<a href="/c_meals/?c=${this.recipe.strCategory}">${this.recipe.strCategory}</a><br>
 		<img src="${this.recipe.strMealThumb}" alt="${this.recipe.strMeal} image"/>
 		<div class="ingredients-list"></div>
 		<div class="instructions">${instructionsCorrections}</div>
@@ -72,5 +76,24 @@ export default class RecipeDetails {
 			</form><br><br>
 		`
 		renderWithTemplate(output, il, "beforeend");
+	}
+	lastViews() {
+		try {
+			var localS = getLocalStorage("last-view");
+			// var ids;
+			if (localS) {
+				const ids = localS.map((item) => item.idMeal);
+				if (ids.find((id) => id == this.recipe.idMeal)) {
+					localS.unshift((localS.splice(ids.findIndex((el) => el == this.recipe.idMeal), 1)[0]));
+				} else {
+					localS.unshift(this.recipe);
+				}
+				setLocalStorage("last-view", localS)
+			} else {
+				setLocalStorage("last-view", [this.recipe])
+			}
+		}catch {
+			new Error("An error has occur")
+		}
 	}
 }

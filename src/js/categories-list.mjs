@@ -2,7 +2,7 @@ import { renderListWithTemplate } from "./utils.js";
 
 export function loadListTemplate(data) {
 	return `<li class="category">
-		<a href="/category-meals/filter.php?c=${data.strCategory}">
+		<a href="/c_meals/?c=${data.strCategory}">
 		<img
 		src="${data.strCategoryThumb}"
 		alt="${data.strCategory} image"

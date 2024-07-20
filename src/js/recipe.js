@@ -5,6 +5,6 @@ import { getParams } from "./utils.js";
 const recipeId = getParams("recipe");
 const dataSource = new ExternalServices();
 
-const recipe = new RecipeDetails(recipeId, dataSource);
+const recipe = new RecipeDetails(dataSource, recipeId);
 
 recipe.init();

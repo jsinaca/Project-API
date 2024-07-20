@@ -9,12 +9,12 @@ export default defineConfig({
     rollupOptions: {
       input: {
         main: resolve(__dirname, "src/index.html"),
-        // cart: resolve(__dirname, "src/cart/index.html"),
-        // checkout: resolve(__dirname, "src/checkout/index.html"),
         recipe: resolve(__dirname, "src/recipe/index.html"),
-        // list: resolve(__dirname, "src/recipe/index.html"),
-        category_meals: resolve(__dirname, "src/category-meals/index.html"),
+        c_meals: resolve(__dirname, "src/c_meals/index.html"),
         categories: resolve(__dirname, "src/categories/index.html"),
+        country: resolve(__dirname, "src/country/index.html"),
+        countries: resolve(__dirname, "src/countries/index.html"),
+        latest: resolve(__dirname, "src/latest/index.html"),
       },
     },
   },

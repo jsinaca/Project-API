@@ -7,10 +7,9 @@ export function loadListTemplate(data) {
 		src="${data.strMealThumb}"
 		alt="${data.strMeal} image"
 		/>
-		<p class="recipe__name">${data.strMeal}</p>
-		<p class="recipe__category">${data.strCategory}</p>
-		<p class="product-recipe__origin">${data.strArea}</p></a
-		>
+		<p class="recipe__name">${data.strMeal}</p></a>
+		<a href="/c_meals/?c=${data.strCategory}"><p class="recipe__category">${data.strCategory}</p></a>
+		<a href="/country/?a=${data.strArea}"><p class="product-recipe__origin">${data.strArea}</p></a>
 		</li>`;
 }
 
@@ -26,4 +25,5 @@ export default class RecipesList {
 	renderList(data) {
 		renderListWithTemplate(loadListTemplate, this.listElement, data);
 	}
+
 }
