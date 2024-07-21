@@ -124,17 +124,17 @@ function carouselButtons(data) {
 function abilitateCarouselButtons() {
   showSlides(slideIndex);
 }
+
 function showSlides(n) {
   let slides = document.getElementsByClassName("card");
   let dots = document.getElementsByClassName("dot");
-  if (n > slides.length) {
-    slideIndex = 1;
-  }
-  if (n < 1) {
-    slideIndex = slides.length;
-  }
   for (var element of slides) {
     element.style.display = "none";
+  }
+  if (n > slides.length) {slideIndex = 1;}
+  if (slideIndex > slides.length) {slideIndex = 1;} 
+  if (n < 1) {
+    slideIndex = slides.length;
   }
   for (var el of dots) {
     el.className = el.className.replace(" active", "");

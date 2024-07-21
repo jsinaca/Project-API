@@ -60,16 +60,4 @@ export default class ExternalServices {
     const data = await convertToJson(response);
     return data.meals;
   }
-
-  async checkout(formData) {
-    const temp = JSON.stringify(formData);
-    const options = {
-      method: "POST", 
-      headers: {"Content-Type": "application/json"}, 
-      body: temp
-    }
-    // console.log(formData);
-    var w = await fetch(`${baseURL}checkout`, options);
-    return convertToJson(w);
-    }
 }
