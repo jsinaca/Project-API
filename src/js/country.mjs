@@ -21,7 +21,7 @@ export default class CountryMeals {
     document.querySelector("title").innerHTML = `Country: ${country}`;
     document.querySelector("h1").innerHTML = `Country: ${country}`;
 
-	const getData = await this.dataSourse.getCountryMeals(country);
+    const getData = await this.dataSourse.getCountryMeals(country);
     this.renderList(getData);
   }
 	renderList(data) {

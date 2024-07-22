@@ -1,18 +1,18 @@
 import { loadHeaderFooter, renderWithTemplate, getParams, getLocalStorage, setLocalStorage } from "./utils.js";
 
 export default class RecipeDetails {
-  constructor(services, id = undefined) {
+  constructor(dataSourse, id = undefined) {
     this.id = id;
-    this.services = services;
+    this.dataSourse = dataSourse;
     this.recipe = {};
   }
   async init() {
     loadHeaderFooter();
 	if (this.id) {
-		this.recipe = await this.services.findRecipeById(this.id);
+		this.recipe = await this.dataSourse.findRecipeById(this.id);
 
 	} else {
-		this.recipe = await this.services.getRandomMeal();
+		this.recipe = await this.dataSourse.getRandomMeal();
 	}
 		document.querySelector("title").innerHTML = this.recipe.strMeal
     this.loadDetails();
@@ -79,7 +79,6 @@ export default class RecipeDetails {
 	lastViews() {
 		try {
 			var localS = getLocalStorage("last-view");
-			// var ids;
 			if (localS) {
 				const ids = localS.map((item) => item.idMeal);
 				if (ids.find((id) => id == this.recipe.idMeal)) {

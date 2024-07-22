@@ -19,7 +19,7 @@ export default class CategoriesList {
   this.listElement = listElement;
   }
   async init() {
-		const getData = await this.dataSourse.getCategories();
+	const getData = await this.dataSourse.getCategories();
     this.renderList(getData);
   }
 	renderList(data) {

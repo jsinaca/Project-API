@@ -15,8 +15,8 @@ export default class Countries {
     document.querySelector("title").innerHTML = `Countries`;
     document.querySelector("h1").innerHTML = `Countries`;
 
-	const getData = await this.dataSourse.getCountries();
-    this.renderList(getData);
+    const getData = await this.dataSourse.getCountries();
+      this.renderList(getData);
   }
 	renderList(data) {
 		renderListWithTemplate(loadListTemplate, this.listElement, data);

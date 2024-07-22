@@ -1,6 +1,4 @@
 const baseURL = import.meta.env.VITE_SERVER_URL;
-const KEY = import.meta.env.VITE_RAPIDAPI_KEY;
-const VITE_HOST = import.meta.env.VITE_RAPIDAPI_HOST;
 
 export async function convertToJson(res) {
     const jsonResponse = await res.json();
@@ -16,8 +14,8 @@ export default class ExternalServices {
       this.options = {
         method: "GET",
         headers: {
-            "x-rapidapi-key": KEY,
-            "x-rapidapi-host": VITE_HOST,
+            "x-rapidapi-key": import.meta.env.VITE_RAPIDAPI_KEY,
+            "x-rapidapi-host": import.meta.env.VITE_RAPIDAPI_HOST,
         }};
   }
   async getRandomMeals() {
@@ -57,6 +55,11 @@ export default class ExternalServices {
   }
   async latest() {
     const response = await fetch(`${baseURL}latest.php`, this.options);
+    const data = await convertToJson(response);
+    return data.meals;
+  }
+  async search(ingredient) {
+    const response = await fetch(`${baseURL}filter.php?i=${ingredient}`, this.options);
     const data = await convertToJson(response);
     return data.meals;
   }

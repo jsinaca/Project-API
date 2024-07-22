@@ -1,4 +1,4 @@
-@import url('https://fonts.googleapis.com/css2?family=Open+Sans:ital,wght@0,300..800;1,300..800&family=Playwrite+PE:wght@100..400&display=swap');
+@import url("https://fonts.googleapis.com/css2?family=Open+Sans:ital,wght@0,300..800;1,300..800&family=Playwrite+PE:wght@100..400&display=swap");
 
 /* font-family: "Open Sans", sans-serif; */
 /* font-family: "Playwrite PE", cursive; */
@@ -31,7 +31,6 @@ body {
   font-family: var(--font-body);
   font-size: var(--font-base);
   color: var(--dark-grey);
-  /* margin: 1rem; */
 }
 
 .logo-container,
@@ -97,15 +96,14 @@ img:hover {
   border-radius: 5px;
   text-decoration: overline;
   transition: all ease 0.5s;
-  /* font-size:large; */
 }
 
 .recipe-list,
 .categories-list,
 .category-list,
-.country-list {
+.country-list,
+.ing-list {
   display: grid;
-  /* grid-template-columns: 19% 19% 19% 19% 19%; */
   grid-template-columns: 1fr 1fr 1fr 1fr 1fr;
   gap: 15px;
   padding: 0px;
@@ -113,31 +111,35 @@ img:hover {
 .recipe-list li,
 .categories-list li,
 .category-list li,
-.country-list li {
+.country-list li,
+.ing-list li {
   list-style-type: none;
   padding: 5px;
 }
 .recipe-list li:hover,
 .categories-list li:hover,
 .category-list li:hover,
-.country-list li:hover  {
+.country-list li:hover,
+.ing-list li:hover {
   border: solid var(--secondary-color) 2px;
   box-shadow: 2px 1px 1px var(--primary-color);
   opacity: 80%;
-  transition: all ease .1s;
+  transition: all ease 0.1s;
   border-radius: 5px;
 }
 .recipe-list img,
 .categories-list img,
 .category-list img,
-.country-list img {
+.country-list img,
+.ing-list img {
   width: 100%;
 }
 .recipe-recipe a,
 .recipe-list a,
 .categories-list a,
 .category-list a,
-.country-list a {
+.country-list a,
+.ing-list a {
   text-decoration: none;
   font-size: large;
   color: var(--dark-grey);
@@ -276,6 +278,9 @@ main {
   .logo-container img {
     width: 20%;
   }
+  .logo a {
+    font-size: 20px;
+  }
   .search {
     width: 150px;
   }
@@ -286,9 +291,6 @@ main {
     grid-template-columns: 1fr 1fr;
     margin-top: 0;
   }
-  /* main {
-    margin: 10px;
-  } */
   .country-list img {
     margin: auto;
   }

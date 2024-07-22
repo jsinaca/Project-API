@@ -4,7 +4,6 @@ import { loadHeaderFooter } from "./utils.js";
 
 loadHeaderFooter();
 
-// const category = getParams("category");
 const externalServices = new ExternalServices();
 const element = document.querySelector(".recipe-list");
 const listing = new RecipesList(externalServices, element);

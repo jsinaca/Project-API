@@ -1,5 +1,5 @@
-const RAPIDAPI_KEY = "ba341f0179msh3b704b322f3a8dbp10e46bjsn5769d1e5fbf6";
-const HOST = "themealdb.p.rapidapi.com";
+"use strict"
+import Search from "./search.mjs";
 let slideIndex = 1;
 
 export function getLocalStorage(key) {
@@ -16,9 +16,11 @@ export async function loadHeaderFooter() {
   const header = document.querySelector("#main-header");
   const footer = document.querySelector("#main-footer");
 
-  renderWithTemplate(headerTemp, header);
-  renderWithTemplate(footerTemp, footer);
-  carousel();
+  await renderWithTemplate(headerTemp, header);
+  await renderWithTemplate(footerTemp, footer);
+  await carousel();
+  const searchBtn = new Search();
+  searchBtn.avilitateSearchBtn();
 }
 
 export async function loadTemplate(path) {
@@ -79,6 +81,10 @@ export function getParams(param, link = undefined) {
 function carousel() {
   const data = getLocalStorage("last-view");
   if (data) {
+    if (data.length > 10) {
+      data.pop();
+      setLocalStorage("last-view", data);
+    }
     const parentElement = document.querySelector(".carousel");
     renderWithTemplate("Recenty View", parentElement.previousElementSibling);
     renderListWithTemplate(templateCarousel, parentElement, data, "beforeend");
@@ -131,8 +137,12 @@ function showSlides(n) {
   for (var element of slides) {
     element.style.display = "none";
   }
-  if (n > slides.length) {slideIndex = 1;}
-  if (slideIndex > slides.length) {slideIndex = 1;} 
+  if (n > slides.length) {
+    slideIndex = 1;
+  }
+  if (slideIndex > slides.length) {
+    slideIndex = 1;
+  }
   if (n < 1) {
     slideIndex = slides.length;
   }

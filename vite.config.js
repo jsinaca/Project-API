@@ -15,6 +15,7 @@ export default defineConfig({
         country: resolve(__dirname, "src/country/index.html"),
         countries: resolve(__dirname, "src/countries/index.html"),
         latest: resolve(__dirname, "src/latest/index.html"),
+        search: resolve(__dirname, "src/search/index.html"),
       },
     },
   },

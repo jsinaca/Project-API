@@ -20,10 +20,9 @@ export default class RecipesList {
   }
   async init() {
 		const getData = await this.dataSourse.getRandomMeals();
-    this.renderList(getData);
+		await this.renderList(getData);
   }
 	renderList(data) {
 		renderListWithTemplate(loadListTemplate, this.listElement, data);
 	}
-
 }
