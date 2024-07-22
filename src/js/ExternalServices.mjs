@@ -1,3 +1,4 @@
+"use strict"
 const baseURL = import.meta.env.VITE_SERVER_URL;
 
 export async function convertToJson(res) {
