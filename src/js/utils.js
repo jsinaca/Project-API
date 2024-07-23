@@ -21,6 +21,10 @@ export async function loadHeaderFooter() {
   await carousel();
   const searchBtn = new Search();
   searchBtn.avilitateSearchBtn();
+  const cellPhoneNAv = document.querySelector(".menu-options-container");
+
+  document.querySelector(".icon").addEventListener("click", () => cellPhoneNAv.style.width = "100%");
+  document.querySelector(".closebtn").addEventListener("click", () => cellPhoneNAv.style.width = "0%");
 }
 
 export async function loadTemplate(path) {
