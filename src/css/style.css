@@ -361,24 +361,24 @@ main {
   }
   .menu-options-container {
     height: 100%;
-    position: fixed; 
+    position: fixed;
     z-index: 1;
     left: 0;
     top: 0;
-    background-color: rgba(0,0,0, 0.9); 
-    overflow-x: hidden; 
-    transition: 0.5s; 
+    background-color: rgba(0, 0, 0, 0.9);
+    overflow-x: hidden;
+    transition: 0.5s;
   }
   .menu-options-container ul {
     flex-direction: column;
-    background-color: rgba(0, 0, 0, 0.669);   
+    background-color: rgba(0, 0, 0, 0.669);
   }
   .overlay-cont {
     position: relative;
     top: 0%;
     width: 100%;
     text-align: start;
-    margin-top: 0px; 
+    margin-top: 0px;
   }
   .overlay-cont li a {
     padding: 8px;
@@ -388,10 +388,12 @@ main {
     display: block;
     transition: 0.3s;
   }
-  .overlay-cont li a:hover, .overlay-cont li a:focus {
+  .overlay-cont li a:hover,
+  .overlay-cont li a:focus {
     color: var(--secondary-color);
   }
-  .menu-options-container, .closebtn {
+  .menu-options-container,
+  .closebtn {
     font-size: 60px;
   }
   .icon {
@@ -407,4 +409,3 @@ main {
     text-decoration: none;
   }
 }
-
