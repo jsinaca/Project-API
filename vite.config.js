@@ -16,6 +16,7 @@ export default defineConfig({
         countries: resolve(__dirname, "src/countries/index.html"),
         latest: resolve(__dirname, "src/latest/index.html"),
         search: resolve(__dirname, "src/search/index.html"),
+        random: resolve(__dirname, "src/random/index.html"),
       },
     },
   },

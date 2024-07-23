@@ -292,7 +292,8 @@ main {
   .recipe-list,
   .categories-list,
   .category-list,
-  .country-list {
+  .country-list,
+  .ing-list {
     grid-template-columns: 1fr 1fr;
     margin-top: 0;
   }
