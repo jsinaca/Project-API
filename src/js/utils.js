@@ -1,4 +1,4 @@
-"use strict"
+"use strict";
 import Search from "./search.mjs";
 let slideIndex = 1;
 
@@ -21,6 +21,24 @@ export async function loadHeaderFooter() {
   await carousel();
   const searchBtn = new Search();
   searchBtn.avilitateSearchBtn();
+
+  const icon = document.querySelector(".icon");
+  const closeBtn = document.querySelector(".closebtn");
+  const cellPhoneNAv = document.querySelector(".menu-options-container");
+  if (innerWidth <= 600) {
+    icon.style.display = "flex";
+    closeBtn.style.display = "flex";
+    icon.addEventListener("click", () => {
+      (cellPhoneNAv.style.width = "100%"),
+        cellPhoneNAv.style.removeProperty("display");
+    });
+    closeBtn.addEventListener("click", () => (cellPhoneNAv.style.width = "0%"));
+    cellPhoneNAv.style.display = "none";
+  } else {
+    cellPhoneNAv.style.width = "100%";
+    icon.style.display = "none";
+    closeBtn.style.display = "none";
+  }
 }
 
 export async function loadTemplate(path) {

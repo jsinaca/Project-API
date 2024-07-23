@@ -11,6 +11,9 @@ Use this as a starting point: the Recepy web application.
 
 ## Other commands
 
-- `npm run build` to build final files when you are ready to turn in.
+- `npm run build` to build final files.
 - `npm run lint` to run ESLint against your code to find errors.
 - `npm run format` to run Prettier to automatically format your code.
+
+## Website
+https://api-project-js.netlify.app/ 
